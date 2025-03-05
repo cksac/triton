@@ -360,7 +360,7 @@ def main(raw_args=None):
     parser.add_argument("--lib-path", dest="lib_path", help="Path to the extern library")
     parser.add_argument("--lib-name", dest="lib_name", help="Name of the extern library")
     parser.add_argument("--output", dest="output_dir", help="Output file path", default="/tmp/")
-    args = parser.parse_args(raw_args)
+    args = parser.parse_args(args=raw_args)
 
     build(args.llvm_dis_path, args.lib_path, args.lib_name, args.output_dir)
 
