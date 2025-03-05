@@ -252,7 +252,7 @@ Example usage:
 python link.py /path/to/headers/*.h -o kernel_name
 """
 
-if __name__ == "__main__":
+def main(raw_args=None):
     from argparse import ArgumentParser
 
     parser = ArgumentParser(description=desc)
@@ -268,7 +268,7 @@ if __name__ == "__main__":
         default="",
         help="String to prefix kernel dispatcher names",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(args=raw_args)
 
     # metadata
     parser = HeaderParser()
@@ -320,3 +320,6 @@ if __name__ == "__main__":
         out += "\n"
         out += default_algo_kernel
         fp.write(out)
+
+if __name__ == "__main__":
+    main()

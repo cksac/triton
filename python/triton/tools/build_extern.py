@@ -354,12 +354,16 @@ def build(
     extern_lib.generate_stub_file(output_dir)
 
 
-if __name__ == "__main__":
+def main(raw_args=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--llvm-dis", dest="llvm_dis_path", help="Path to llvm-dis", default="llvm-dis")
     parser.add_argument("--lib-path", dest="lib_path", help="Path to the extern library")
     parser.add_argument("--lib-name", dest="lib_name", help="Name of the extern library")
     parser.add_argument("--output", dest="output_dir", help="Output file path", default="/tmp/")
-    args = parser.parse_args()
+    args = parser.parse_args(raw_args)
 
     build(args.llvm_dis_path, args.lib_path, args.lib_name, args.output_dir)
+
+if __name__ == "__main__":
+    main()
+

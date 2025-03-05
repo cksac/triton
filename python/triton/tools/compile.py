@@ -36,8 +36,8 @@ NOTE: when resolving the scope of /path/to/kernel.py, the file will be executed 
 used to run this `compile.py` script
 """
 
-if __name__ == "__main__":
 
+def main(raw_args=None):
     # command-line arguments
     parser = ArgumentParser(description=desc)
     parser.add_argument("path",
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     parser.add_argument("--out-path", "-o", type=Path, default=None, help="Out filename")
     parser.add_argument("--signature", "-s", type=str, help="Signature of the kernel", required=True)
     parser.add_argument("--grid", "-g", type=str, help="Launch grid of the kernel", required=True)
-    args = parser.parse_args()
+    args = parser.parse_args(args=raw_args)
 
     out_name = args.out_name if args.out_name else args.kernel_name
     out_path = args.out_path if args.out_path else Path(out_name)
@@ -160,3 +160,6 @@ if __name__ == "__main__":
         template_path = Path(__file__).parent / "extra" / "cuda" / f"compile.{ext}"
         with out_path.with_suffix(f".{sig_hash}_{suffix}.{ext}").open("w") as fp:
             fp.write(Path(template_path).read_text().format(**params))
+
+if __name__ == "__main__":
+    main()
